@@ -1,1 +1,78 @@
-Login
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Budget</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <div class="menu">
+        
+        <ul>
+            <li><a href="/">Home</a></li>
+            <!--Previous: <li><a href="/public/about.html">About</a></li> -->
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/login.html">Login</a></li>
+            <pb-signup><li><a href="signup.html">Signup</a></li></pb-signup>
+            <li><a href="https://google.com" >Google</a></li>
+        </ul>
+    </div>
+
+    <div class="hero">
+        <!-- This is an SEO Change -->
+        <!-- I added keywords to the header1 to increase searches for "college students" and "finance" -->
+        <h1>Personal Finance Budget for College Students</h1>
+        <h2>A personal-budget management app</h2>
+    </div>
+                <h1 id = "title1">Login Here</h1>
+
+        </div>
+
+        <label for="budget">Username:</label>
+        <input type="text" id="username" name="username" placeholder="username"><br>
+        <label for="title">Password:</label>
+        <input type="text" id="password" name="password" placeholder="password"><br>
+        <button onclick="loginCheck()">Login</button>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>    
+    <script>
+    function loginCheck() 
+    {
+        axios.get('/login')
+        .then(function (res) 
+        {
+
+            
+            console.log(res);
+            //document.getElementById("title1").innerHTML = res.data[0].username;
+
+            for (var i = 0; i < res.data.length; i++) 
+            {
+                console.log("Username: " + res.data[i].username + " Password: " +  res.data[i].password );
+                if( document.getElementById("username").value == res.data[i].username &&  document.getElementById("password").value == res.data[i].password)
+                {
+                    console.log("login completed");
+                    break;
+                }
+                else 
+                {
+                    console.log("Failed attempt")
+                }
+            }
+            //console.log("Login Failed");
+        });
+    }
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+

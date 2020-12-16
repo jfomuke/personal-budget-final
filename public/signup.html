@@ -27,14 +27,44 @@
         <h1>Personal Finance Budget for College Students</h1>
         <h2>A personal-budget management app</h2>
     </div>
+                <h1 id = "title1">Register Here</h1>
+
+        </div>
+
+        <label for="budget">Username:</label>
+        <input type="text" id="username" name="username" placeholder="username"><br>
+        <label for="title">Password:</label>
+        <input type="text" id="password" name="password" placeholder="password"><br>
+        <button onclick="signUpCheck()">Register</button>
 
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>    
+    <script>
+    function signUpCheck() 
+    {
 
-    <!-- Signup area -->
-
-<button type="button" onclick="sqlConnect()" id="signupBT">Click Me!</button>
-
-<script src="sql.js"></script>
+        //var username = document.getElementById("username").value;
+        //var password = document.getElementById("password").value;
+        axios.get('/signup',
+        {
+            params: 
+            {
+                username: document.getElementById("username").value,
+                password: document.getElementById("password").value
+            }
+        })
+        .then(function (res) 
+        {
+            console.log(res);
+        });
+    }
+    </script>
 
 </body>
 </html>
+
+
+
+
+
+

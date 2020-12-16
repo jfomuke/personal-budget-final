@@ -98,6 +98,39 @@ app.get('/insert', (req,res) =>
 });
 
 
+app.get('/login', (req,res) => 
+{
+    //console.log(dataLink);
+    //res.send("Test");
+
+    
+        connection.query("SELECT * FROM userTB", function (err, result, fields) 
+        {
+        if (err) throw err;
+        //console.log(result);
+        res.json(result);
+
+        // Loop through the results
+        });
+});
+
+
+app.get('/signup', (req,res) => 
+{
+        let usernameInfo = req.query.username;
+        let passwordInfo = req.query.password;
+
+        connection.query("INSERT INTO `userTB` (`username`, `password`) VALUES ('" + usernameInfo + "', '" + passwordInfo + "');", function (err, result, fields) 
+        {
+        if (err) throw err;
+        //console.log(result);
+        res.json(result);
+
+        // Loop through the results
+        });
+});
+
+
 app.listen(port, () => {
     console.log(`API listening at http://localhost:${port}`)
 });

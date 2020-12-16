@@ -101,44 +101,6 @@
 
         </div>
 
-        <br><br>
-        <label >Insert new budget item</label><br>
-        <label for="budget">Budget:</label>
-        <input type="text" id="budget" name="budget" value="50.50"><br>
-        <label for="title">Title:</label>
-        <input type="text" id="title" name="title" value="MISC"><br>
-        <label for="color">Color:</label>
-        <input type="text" id="color" name="color" value="#ffcd56"><br>
-        <button onclick="functionName()">Click me</button>
-        
-        <script type="text/javascript" src="sql.js"> </script>
-
-        <script>
-            function test() 
-            {
-                alert(document.getElementById("budget").value + document.getElementById("title").value + document.getElementById("color").value)
-            }
-
-        </script>
-
-
-
-        <!-- This is a Semantic HTML Change -->
-        <section>
-            Always double check your budget plans!
-
-            <!-- This is an A11y Change -->
-            <!-- The button's CSS is above 44px as per canvas video -->
-            <button type="button">Click Me! I do nothing!</button>
-        </section>
-
-    </div>
-
-    <div class="bottom">
-        <div class="center">
-            All rights reserved &copy; Fabio Nolasco
-        </div>
-    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
@@ -229,6 +191,8 @@
                     dataSource.labels[i] = res.data[i].title;
                 }
                 createChart();
+                createChartDoughnut();
+                createChartPolar();
             });
         }
         sample();
