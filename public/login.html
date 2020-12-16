@@ -42,7 +42,14 @@
     <script>
     function loginCheck() 
     {
-        axios.get('/login')
+        axios.get('/login',
+        {
+            params: 
+            {
+                username: document.getElementById("username").value,
+                password: document.getElementById("password").value
+            }
+        })
         .then(function (res) 
         {
 
@@ -50,19 +57,7 @@
             console.log(res);
             //document.getElementById("title1").innerHTML = res.data[0].username;
 
-            for (var i = 0; i < res.data.length; i++) 
-            {
-                console.log("Username: " + res.data[i].username + " Password: " +  res.data[i].password );
-                if( document.getElementById("username").value == res.data[i].username &&  document.getElementById("password").value == res.data[i].password)
-                {
-                    console.log("login completed");
-                    break;
-                }
-                else 
-                {
-                    console.log("Failed attempt")
-                }
-            }
+           
             //console.log("Login Failed");
         });
     }

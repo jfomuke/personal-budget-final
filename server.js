@@ -19,6 +19,22 @@ var connection = mysql.createConnection
     database: 'sql9382086'
 })
 var sqlResults;
+//app.use(bodyParser.json());
+//app.use(bodyParser.urlencoded({ extended: true}));
+const jwt = require('jsonwebtoken');
+const exjwt = require('express-jwt');
+const secretKey = 'My super secret key';
+const jwtMW = exjwt
+({
+    secret: secretKey,
+    algorithms: ['HS256']
+});
+app.use((req, res, next) => 
+{
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-type,Authorization');
+    next();
+});
 
 
 // Currently CORS is completely open - modify to a whitelist if necesary. 
@@ -82,6 +98,22 @@ app.get('/sample', (req,res) =>
 });
 
 
+app.get('/dashboard'/*, jwtMW*/, (req,res) => 
+{
+    //console.log(dataLink);
+    //res.send("Test");
+
+    
+        connection.query("SELECT * FROM budgetTB", function (err, result, fields) 
+        {
+        if (err) throw err;
+        console.log(result);
+        sqlResults = result;
+        res.json(sqlResults);
+        });
+});
+
+
 app.get('/insert', (req,res) => 
 {
 
@@ -103,14 +135,45 @@ app.get('/login', (req,res) =>
     //console.log(dataLink);
     //res.send("Test");
 
+        let usernameInfo = req.query.username;
+        let passwordInfo = req.query.password;
     
         connection.query("SELECT * FROM userTB", function (err, result, fields) 
         {
         if (err) throw err;
-        //console.log(result);
-        res.json(result);
+        
+        //res.json(result);
+        console.log(result.length);
+        console.log(result[0].username)
 
+        /*  */
         // Loop through the results
+        for (var i = 0; i < result.length; i++) 
+            {
+                console.log("Username: " + result[i].username + " Password: " +  result[i].password );
+                if( usernameInfo == result[i].username &&  passwordInfo == result[i].password)
+                {
+                    console.log("login completed");
+
+                    let token = jwt.sign({ id: result[i].primaryKey, username: result[i].username }, secretKey, { expiresIn: '2d' });
+                        res.json
+                        ({
+                            success: true,
+                            err: null,
+                            token
+                        });
+                        
+                    break;
+                }
+                else 
+                {
+                    console.log("Failed attempt")
+                }
+            }
+
+
+
+
         });
 });
 
@@ -131,6 +194,54 @@ app.get('/signup', (req,res) =>
 });
 
 
+
+
+
 app.listen(port, () => {
     console.log(`API listening at http://localhost:${port}`)
 });
+
+
+/* 
+
+ for (var i = 0; i < res.data.length; i++) 
+            {
+                console.log("Username: " + res.data[i].username + " Password: " +  res.data[i].password );
+                if( document.getElementById("username").value == res.data[i].username &&  document.getElementById("password").value == res.data[i].password)
+                {
+                    console.log("login completed");
+                        // Successful Login & Give token
+                        let token = jwt.sign({ id: user.id, username: user.username }, secretKey, { expiresIn: '7d' });
+                        res.json
+                        ({
+                            success: true,
+                            err: null,
+                            token
+                        });
+                    break;
+                }
+                else 
+                {
+                    console.log("Failed attempt")
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+// Successful Login & Give token
+                        let token = jwt.sign({ id: user.id, username: user.username }, secretKey, { expiresIn: '7d' });
+                        result.json
+                        ({
+                            success: true,
+                            err: null,
+                            token
+                        });
+
+*/
