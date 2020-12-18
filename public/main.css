@@ -102,3 +102,10 @@ button{
     width: 100px;
     height: 100px;
 }
+
+#chartBox
+{
+   width:500px; /* or whatever width you want. */
+   max-width:500px; /* or whatever width you want. */
+   display: inline-block;
+}
