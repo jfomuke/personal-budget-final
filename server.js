@@ -45,7 +45,7 @@ app.use('/', express.static('public'));
 
 // connection.connect();
 
-app.get('/sample', (req,res) => 
+app.get('sample', (req,res) => 
 {
         connection.query("SELECT * FROM budgetTB", function (err, result, fields) 
         {
