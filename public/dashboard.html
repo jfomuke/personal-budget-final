@@ -160,19 +160,24 @@
             });
         }
 
-        // data.budget.myBudget[0].budget
-        function getBudget() {
-            axios.get('/budget')
-            .then(function (res) {
+        function sample() 
+        {
+            axios.get('/sample')
+            .then(function (res) 
+            {
                 console.log(res);
-                for (var i = 0; i < res.data.budget.myBudget.length; i++) 
+
+                for (var i = 0; i < res.data.length; i++) 
                 {
-                    dataSource.datasets[0].data[i] = res.data.budget.myBudget[i].budget;
-                    dataSource.labels[i] = res.data.budget.myBudget[i].title;
+                    dataSource.datasets[0].data[i] = res.data[i].budget;
+                    dataSource.labels[i] = res.data[i].title;
                 }
+                createChart();
+                createChartDoughnut();
+                createChartPolar();
             });
         }
-        getBudget();
+        sample();
 
 
 
