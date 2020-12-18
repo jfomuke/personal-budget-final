@@ -159,23 +159,7 @@
             });
         }
 
-        // data.budget.myBudget[0].budget
-        function getBudget() {
-            axios.get('/budget')
-            .then(function (res) {
-                console.log(res);
-                for (var i = 0; i < res.data.budget.myBudget.length; i++) 
-                {
-                    dataSource.datasets[0].data[i] = res.data.budget.myBudget[i].budget;
-                    dataSource.labels[i] = res.data.budget.myBudget[i].title;
-                }
-                // conversion to dataSource is done - cuz it needs datasets and labels fields
-                //createChart();
-                //createChartDoughnut();
-                //createChartPolar();
-            });
-        }
-        getBudget();
+        
 
 
 
