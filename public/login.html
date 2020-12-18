@@ -10,14 +10,12 @@
 <body>
 
     <div class="menu">
-        
         <ul>
             <li><a href="/">Home</a></li>
-            <!--Previous: <li><a href="/public/about.html">About</a></li> -->
-            <li><a href="/about.html">About</a></li>
-            <li><a href="/login.html">Login</a></li>
+            <li><a href="login.html">Login</a></li>
             <pb-signup><li><a href="signup.html">Signup</a></li></pb-signup>
-            <li><a href="https://google.com" >Google</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="newBudget.html">Add</a></li>
         </ul>
     </div>
 
@@ -55,10 +53,13 @@
 
             
             console.log(res);
-            //document.getElementById("title1").innerHTML = res.data[0].username;
-
-           
-            //console.log("Login Failed");
+            
+            if (res && res.data && res.data.success) 
+                {
+                    const token = res.data.token;
+                    localStorage.setItem('jwt', token);
+                    getDashboard();
+                }
         });
     }
     </script>

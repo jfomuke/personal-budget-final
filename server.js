@@ -31,7 +31,7 @@ const jwtMW = exjwt
 });
 app.use((req, res, next) => 
 {
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.setHeader('Access-Control-Allow-Headers', 'Content-type,Authorization');
     next();
 });
@@ -117,14 +117,15 @@ app.get('/login', (req,res) =>
                 if( usernameInfo == result[i].username &&  passwordInfo == result[i].password)
                 {
                     console.log("login completed");
-                    // alert("Login successful - You have been given a login token");
-                    let token = jwt.sign({ id: result[i].primaryKey, username: result[i].username }, secretKey, { expiresIn: '2d' });
+                    let token = jwt.sign({ id: /*result[i].primaryKey*/ 1, username: /*result[i].username*/ "DEFAULT" }, secretKey, { expiresIn: '7d' });
                         res.json
                         ({
                             success: true,
                             err: null,
                             token
                         });
+                        
+                        console.log("Login successful - You have been given a login token");
                         
                     break;
                 }

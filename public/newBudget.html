@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Budget</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <div class="menu">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="login.html">Login</a></li>
+            <pb-signup><li><a href="signup.html">Signup</a></li></pb-signup>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="newBudget.html">Add</a></li>
+        </ul>
+    </div>
+
+    <div class="hero">
+        <!-- This is an SEO Change -->
+        <!-- I added keywords to the header1 to increase searches for "college students" and "finance" -->
+        <h1>Personal Finance Budget for College Students</h1>
+        <h2>A personal-budget management app</h2>
+    </div>
+
+        <br><br>
+        <label >Insert new budget item</label><br>
+        <label for="budget">Budget:</label>
+        <input type="text" id="budget" name="budget" value="50.50"><br>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" value="MISC"><br>
+        <label for="color">Color:</label>
+        <input type="text" id="color" name="color" value="#ffcd56"><br>
+        <button onclick="insertInfo()">Click me</button>
+
+        <script>
+            function test() 
+            {
+                alert(document.getElementById("budget").value + document.getElementById("title").value + document.getElementById("color").value)
+            }
+
+        </script>
+
+
+    </div>
+
+    <div class="bottom">
+        <div class="center">
+            All rights reserved &copy; Fabio Nolasco
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js" integrity="sha512-quHCp3WbBNkwLfYUMd+KwBAgpVukJu5MncuQaWXgCrfgcxCJAq/fo+oqrRKOj+UKEmyMCG3tb8RB63W+EmrOBg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" integrity="sha512-s+xg36jbIujB2S2VKfpGmlC3T5V2TF3lY48DX7u2r9XzGzgPsa6wTpOQA7J9iffvdeBN0q9tKzRxVxw1JviZPg==" crossorigin="anonymous"></script>
+    
+   
+    <script>
+
+
+
+        function insertInfo() 
+        {
+            const token = localStorage.getItem('jwt');
+
+            if(token)
+            {
+                axios.get('/insert', 
+                    {
+                        params: 
+                        {
+                            budget: document.getElementById("budget").value,
+                            title: document.getElementById("title").value,
+                            color: document.getElementById("color").value
+                        }
+                    }, 
+                    {
+                        headers: 
+                        {
+                            'Authorization': `Bearer ${token}`
+                        }
+                    })
+                    .then(function (res) 
+                    {
+                        
+                        console.log(res);
+                    });
+            }
+            else
+            {
+                
+            }
+        }
+
+
+
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+

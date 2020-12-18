@@ -10,95 +10,27 @@
 <body>
 
     <div class="menu">
-        
         <ul>
             <li><a href="/">Home</a></li>
-            <!--Previous: <li><a href="/public/about.html">About</a></li> -->
-            <li><a href="/about.html">About</a></li>
-            <li><a href="/login.html">Login</a></li>
+            <li><a href="login.html">Login</a></li>
             <pb-signup><li><a href="signup.html">Signup</a></li></pb-signup>
-            <li><a href="https://google.com" >Google</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="newBudget.html">Add</a></li>
         </ul>
     </div>
 
-    <div class="hero">
-        <!-- This is an SEO Change -->
-        <!-- I added keywords to the header1 to increase searches for "college students" and "finance" -->
-        <h1 id="title1">Personal Finance Budget for College Students</h1>
-        <h2>A personal-budget management app</h2>
-    </div>
 
-    <div class="container center">
-
-        <div class="page-area">
-
-            
-                <div class="text-box">
-                    <h1>Stay on track</h1>
-                    <p>
-                        Do you know where you are spending your money? If you really stop to track it down,
-                        you would get surprised! Proper budget management depends on real data... and this
-                        app will help you with that!
-                    </p>
-                </div>
-    
-            <div class="text-box">
-                <h1>Alerts</h1>
-                <p>
-                    What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
-                </p>
+            <br>
+            <hr>
+            <div id = "chartBox">
+                <h1 class = "chartTitle">Charts - Pie, Doughnut, Polar </h1>
+                <h2 class="center">Only viewable when logged in</h2>
+                    <canvas id="myChart" width="200" height="200"></canvas>
+                    <hr>
+                    <canvas id="myChartDoughnut" width="200" height="200"></canvas>
+                    <hr>
+                    <canvas id="myChartPolar" width="200" height="200"></canvas>
             </div>
-    
-            <div class="text-box">
-                <h1>Results</h1>
-                <p>
-                    People who stick to a financial plan, budgeting every expense, get out of debt faster!
-                    Also, they to live happier lives... since they expend without guilt or fear... 
-                    because they know it is all good and accounted for.
-                </p>
-            </div>
-    
-            <div class="text-box">
-                <h1>Free</h1>
-                <p>
-                    This app is free!!! And you are the only one holding your data!
-                </p>
-            </div>
-    
-            <div class="text-box">
-                <h1>Stay on track</h1>
-                <p>
-                    Do you know where you are spending your money? If you really stop to track it down,
-                    you would get surprised! Proper budget management depends on real data... and this
-                    app will help you with that!
-                </p>
-            </div>
-    
-            <div class="text-box">
-                <h1>Alerts</h1>
-                <p>
-                    What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
-                </p>
-            </div>
-    
-            <div class="text-box">
-                <h1>Results</h1>
-                <p>
-                    People who stick to a financial plan, budgeting every expense, get out of debt faster!
-                    Also, they to live happier lives... since they expend without guilt or fear... 
-                    because they know it is all good and accounted for.
-                </p>
-            </div>
-    
-            <div class="text-box">
-                <h1>Charts - Pie, Doughnut, </h1>
-                <p>
-                    <canvas id="myChart" width="400" height="400"></canvas>
-                    <canvas id="myChartDoughnut" width="400" height="400"></canvas>
-                    <canvas id="myChartPolar" width="400" height="400"></canvas>
-                </p>
-            </div>
-
         </div>
 
 
@@ -132,73 +64,72 @@
             ]
         };
 
-        function createChart() {
-            var ctx = document.getElementById("myChart");
-            var myPieChart = new Chart(ctx, {
+        function createChart() 
+        {
+
+            var ctx = document.getElementById("myChart").getContext("2d");
+            var myPieChart = new Chart(ctx, 
+            {
                 type: 'pie',
                 data: dataSource
             });
         }
 
-        function createChartDoughnut() 
-        {
+        function createChartDoughnut() {
             // Change ElementbyId
-            var ctx = document.getElementById("myChartDoughnut");
-            var myDoughnutChart = new Chart(ctx, {
+            var ctx = document.getElementById("myChartDoughnut").getContext("2d");
+            var myDoughnutChart = new Chart(ctx, 
+            {
                 type: 'doughnut',
                 data: dataSource
             });
         }
 
-        function createChartPolar() 
-        {
+        function createChartPolar() {
             // Change ElementbyId
-            var ctx = document.getElementById("myChartPolar");
-            var myDoughnutChart = new Chart(ctx, {
+            var ctx = document.getElementById("myChartPolar").getContext("2d");
+            var myDoughnutChart = new Chart(ctx, 
+            {
                 type: 'polarArea',
                 data: dataSource
             });
         }
 
+        
+
+
+
         function sample() 
         {
-            axios.get('/sample')
-            .then(function (res) 
+            const token = localStorage.getItem('jwt');
+
+            axios.get('/sample', 
+            {
+                headers: 
+                {
+                    'Authorization': `Bearer ${token}`
+                }
+            }).then(function (res) 
             {
                 console.log(res);
-
-                for (var i = 0; i < res.data.length; i++) 
+                if (token) 
                 {
-                    dataSource.datasets[0].data[i] = res.data[i].budget;
-                    dataSource.labels[i] = res.data[i].title;
+                    for (var i = 0; i < res.data.length; i++) 
+                    {
+                        dataSource.datasets[0].data[i] = res.data[i].budget;
+                        dataSource.labels[i] = res.data[i].title;
+                    }
+                    createChart();
+                    createChartDoughnut();
+                    createChartPolar();
                 }
-                createChart();
-                createChartDoughnut();
-                createChartPolar();
+                else
+                {
+                    
+                }
             });
         }
         sample();
-
-
-
-        function dashboardGraphs() 
-        {
-            axios.get('/dashboard')
-            .then(function (res) 
-            {
-                console.log(res);
-
-                for (var i = 0; i < res.data.length; i++) 
-                {
-                    dataSource.datasets[0].data[i] = res.data[i].budget;
-                    dataSource.labels[i] = res.data[i].title;
-                }
-                createChart();
-                createChartDoughnut();
-                createChartPolar();
-            });
-        }
-        dashboardGraphs();
 
     </script>
 
