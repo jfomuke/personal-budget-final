@@ -156,6 +156,27 @@ app.get('/signup', (req,res) =>
 
 
 
+app.get('/modify', (req,res) => 
+{
+    //console.log(dataLink);
+    //res.send("Test");
+
+        let budgetInfo = req.query.budget;
+        let titleInfo = req.query.title;
+        let colorInfo = req.query.color;
+    
+        let queryInfo = ("UPDATE `budgetTB` SET `budget`="+budgetInfo+", `title`='"+titleInfo+"',`color`='"+colorInfo+"' WHERE title='"+titleInfo+"'")
+
+        
+        connection.query(queryInfo, function (err, result, fields) 
+        {
+        if (err) throw err;
+        console.log(result);
+        });
+});
+
+
+
 
 
 app.listen(port, () => {
