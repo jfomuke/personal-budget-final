@@ -22,9 +22,10 @@
 
             <br>
             <hr>
+            <h1 class = "center">Charts - Pie, Doughnut, Polar </h1>
+            <h2 class="center">Only viewable when logged in</h2>
             <div id = "chartBox">
-                <h1 class = "chartTitle">Charts - Pie, Doughnut, Polar </h1>
-                <h2 class="center">Only viewable when logged in</h2>
+                
                     <canvas id="myChart" width="200" height="200"></canvas>
                     <hr>
                     <canvas id="myChartDoughnut" width="200" height="200"></canvas>
@@ -103,7 +104,7 @@
         {
             const token = localStorage.getItem('jwt');
 
-            axios.get('sample', 
+            axios.get('/sample', 
             {
                 headers: 
                 {
