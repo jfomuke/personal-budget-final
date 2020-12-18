@@ -154,7 +154,7 @@ app.get('/login', (req,res) =>
                 if( usernameInfo == result[i].username &&  passwordInfo == result[i].password)
                 {
                     console.log("login completed");
-
+                    // alert("Login successful - You have been given a login token");
                     let token = jwt.sign({ id: result[i].primaryKey, username: result[i].username }, secretKey, { expiresIn: '2d' });
                         res.json
                         ({
