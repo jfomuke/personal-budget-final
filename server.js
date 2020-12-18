@@ -43,7 +43,7 @@ app.use('/', express.static('public'));
 
 
 
-connection.connect();
+// connection.connect();
 
 app.get('/sample', (req,res) => 
 {
