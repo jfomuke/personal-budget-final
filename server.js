@@ -42,43 +42,6 @@ app.use(cors());
 app.use('/', express.static('public'));
 
 
-/*_________________________________________________________________________________________*/
-/* function selectAll()
-{
-    connection.connect(function(err) 
-    {
-        if (err) throw err;
-        connection.query("SELECT * FROM budgetTB", function (err, result, fields) {
-        if (err) throw err;
-        console.log(result);
-        sqlResults = result;
-        });
-    });
-}*/
-//selectAll();
-
-
-
-  /*
-  connection.query("INSERT INTO `user` (`id`, `username`, `password`, `signedup`) VALUES (NULL, '" + username + "', '" + pwd + "', '" + date + "');", function (error, results, fields)
-  {
-      if (error == true) throw error;
-      console.log("1 record inserted");
-      res.json(results);
-  });
-  */
-
-
-  /*_________________________________________________________________________________________*/
-
-
-/*  KEEEP
-app.get('/budget', (req,res) => 
-{
-    //console.log(dataLink);
-    res.json(dataLink);
-});
-*/
 
 connection.connect();
 
@@ -202,46 +165,3 @@ app.listen(port, () => {
 });
 
 
-/* 
-
- for (var i = 0; i < res.data.length; i++) 
-            {
-                console.log("Username: " + res.data[i].username + " Password: " +  res.data[i].password );
-                if( document.getElementById("username").value == res.data[i].username &&  document.getElementById("password").value == res.data[i].password)
-                {
-                    console.log("login completed");
-                        // Successful Login & Give token
-                        let token = jwt.sign({ id: user.id, username: user.username }, secretKey, { expiresIn: '7d' });
-                        res.json
-                        ({
-                            success: true,
-                            err: null,
-                            token
-                        });
-                    break;
-                }
-                else 
-                {
-                    console.log("Failed attempt")
-                }
-            }
-
-
-
-
-
-
-
-
-
-
-// Successful Login & Give token
-                        let token = jwt.sign({ id: user.id, username: user.username }, secretKey, { expiresIn: '7d' });
-                        result.json
-                        ({
-                            success: true,
-                            err: null,
-                            token
-                        });
-
-*/
