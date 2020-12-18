@@ -38,10 +38,8 @@ div.menu ul li a:hover  {
 }
 
 div.hero {
-    height: 350px;
-    background-color: #b4c6f0;
-    background-image: url('/bg.png');
-    background-size: 400px;
+    height: 200px;
+    background-color: #787777;
     background-repeat: no-repeat;
     background-position: center bottom;
     padding-top: 40px;
@@ -54,13 +52,13 @@ div.hero h2 {
 }
 
 div.hero h1 {
-    color: #fff;
+    color:yellow;
     font-size: 4.2em;
     margin-bottom: 20px;
 }
 
 div.hero h2 {
-    color: #4d5791;
+    color: yellow;
 }
 
 .container {
@@ -75,7 +73,7 @@ div.hero h2 {
 
 .bottom {
     height: 50px;
-    background-color: #b4c6f0;
+    background-color: #787777;
     padding: 40px;
 }
 
