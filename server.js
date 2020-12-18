@@ -45,12 +45,8 @@ app.use('/', express.static('public'));
 
 // connection.connect();
 
-app.get('/sample', (req,res) => 
+app.get('/public/sample', (req,res) => 
 {
-    //console.log(dataLink);
-    //res.send("Test");
-
-    
         connection.query("SELECT * FROM budgetTB", function (err, result, fields) 
         {
         if (err) throw err;
